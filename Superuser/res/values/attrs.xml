@@ -13,4 +13,5 @@
     <attr name="notificationsIcon" format="reference|color" />
     <attr name="themeIcon" format="reference|color" />
     <attr name="largeIconTheme" format="reference" />
+    <attr name="iconSize" format="dimension" />
 </resources>
