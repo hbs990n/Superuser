@@ -32,19 +32,21 @@ jobs:
       - name: Set up Android SDK (JDK8 compatible)
         run: |
           SDK_ROOT="$HOME/android-sdk"
-          mkdir -p "$SDK_ROOT/cmdline-tools"
+          CMDLINE_TOOLS_DIR="$SDK_ROOT/cmdline-tools"
+          SDKMANAGER="$CMDLINE_TOOLS_DIR/latest/bin/sdkmanager"
+          mkdir -p "$CMDLINE_TOOLS_DIR"
 
           # Download old cmdline-tools that run on Java 8
           curl -fL -o /tmp/cmdline-tools.zip \
             https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip
-          unzip -q /tmp/cmdline-tools.zip -d "$SDK_ROOT/cmdline-tools"
-          mv "$SDK_ROOT/cmdline-tools/tools" "$SDK_ROOT/cmdline-tools/latest"
+          unzip -q /tmp/cmdline-tools.zip -d "$CMDLINE_TOOLS_DIR"
+          mv "$CMDLINE_TOOLS_DIR/tools" "$CMDLINE_TOOLS_DIR/latest"
 
           echo "ANDROID_HOME=$SDK_ROOT" >> "$GITHUB_ENV"
           echo "$SDK_ROOT/cmdline-tools/latest/bin" >> "$GITHUB_PATH"
           echo "$SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
 
-          yes | sdkmanager --sdk_root="$SDK_ROOT" \
+          yes | "$SDKMANAGER" --sdk_root="$SDK_ROOT" \
             "platform-tools" \
             "platforms;android-22" \
             "build-tools;22.0.1"
