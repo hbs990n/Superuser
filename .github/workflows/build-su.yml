@@ -6,7 +6,7 @@ on:
       app_abi:
         description: "ABIs to build, space separated"
         required: false
-        default: "armeabi-v7a"
+        default: "armeabi armeabi-v7a x86 mips"
 
 jobs:
   build:
@@ -22,7 +22,9 @@ jobs:
           echo "$HOME/android-ndk-r16b" >> "$GITHUB_PATH"
 
       - name: Build su
-        working-directory: Superuser/Superuser
+        working-directory: Superuser
+        env:
+          NDK_TOOLCHAIN_VERSION: "4.9"
         run: ndk-build APP_ABI="${{ inputs.app_abi }}"
 
       - name: Upload su binaries
@@ -30,5 +32,5 @@ jobs:
         with:
           name: su-binaries
           path: |
-            Superuser/Superuser/libs/*/su
+            Superuser/libs/*/su
           if-no-files-found: error
