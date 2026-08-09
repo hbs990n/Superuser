@@ -20,13 +20,6 @@ jobs:
           distribution: temurin
           java-version: 8
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-        with:
-          api-level: 21
-          ndk-version: r25b
-          cmdline-tools-version: latest
-
       - name: Cache Gradle
         uses: actions/cache@v4
         with:
@@ -35,6 +28,26 @@ jobs:
             ~/.gradle/wrapper
           key: gradle-${{ runner.os }}-${{ hashFiles('Superuser-master/Superuser/gradle/wrapper/gradle-wrapper.properties') }}
           restore-keys: gradle-${{ runner.os }}-
+
+      - name: Set up Android SDK (JDK8 compatible)
+        run: |
+          SDK_ROOT="$HOME/android-sdk"
+          mkdir -p "$SDK_ROOT/cmdline-tools"
+
+          # Download old cmdline-tools that run on Java 8
+          curl -fL -o /tmp/cmdline-tools.zip \
+            https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip
+          unzip -q /tmp/cmdline-tools.zip -d "$SDK_ROOT/cmdline-tools"
+          mv "$SDK_ROOT/cmdline-tools/tools" "$SDK_ROOT/cmdline-tools/latest"
+
+          echo "ANDROID_HOME=$SDK_ROOT" >> "$GITHUB_ENV"
+          echo "$SDK_ROOT/cmdline-tools/latest/bin" >> "$GITHUB_PATH"
+          echo "$SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
+
+          yes | sdkmanager --sdk_root="$SDK_ROOT" \
+            "platform-tools" \
+            "platforms;android-22" \
+            "build-tools;22.0.1"
 
       - name: Make gradlew executable
         run: chmod +x Superuser-master/Superuser/gradlew
