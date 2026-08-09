@@ -1,65 +1,46 @@
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.5'
-}
-
 buildscript {
     repositories {
-        maven {
-            url 'https://repo1.maven.org/maven2'
-        }
+        google()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.2.3'
+        classpath 'com.android.tools.build:gradle:4.2.2'
     }
 }
+
 apply plugin: 'com.android.application'
 
 repositories {
-    maven {
-        url 'https://repo1.maven.org/maven2'
-    }
-}
-
-dependencies {
-    compile project(':Widgets')
+    google()
+    mavenCentral()
 }
 
 android {
-    packagingOptions {
-        exclude 'META-INF/beans.xml'
-    }
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
-    signingConfigs {
-        release {
-			if(System.getenv("KEYSTORE") != null) {
-	        storeFile file(System.getenv("KEYSTORE"))
-				storePassword new String(System.console().readPassword("\n\$ Enter store password: "))
-				keyAlias "su"
-				keyPassword new String(System.console().readPassword("\n\$ Enter key password: "))
-			}
-        }
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
     }
 
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
-            jniLibs.srcDirs = ['libs']
-            assets.srcDirs = ['assets/']
-            res.srcDirs = ['res/']
             java.srcDirs = ['src/']
-            aidl.srcDirs = ['src/']
+            res.srcDirs = ['res/']
+            assets.srcDirs = ['assets/']
+            jniLibs.srcDirs = ['libs']
         }
     }
 
-    compileSdkVersion 22
-    buildToolsVersion '22.0.1'
-
-    defaultConfig {
-        File f = new File("packageName")
-        minSdkVersion 14
-        targetSdkVersion 22
-        if(f.exists())
-            applicationId f.text
-        signingConfig signingConfigs.release
+    packagingOptions {
+        exclude 'META-INF/beans.xml'
     }
+}
+
+dependencies {
+    // Widgets module removed (empty)
 }
