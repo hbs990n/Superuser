@@ -1,0 +1,34 @@
+name: Build Superuser su
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_abi:
+        description: "ABIs to build, space separated"
+        required: false
+        default: "armeabi-v7a"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install NDK r16b
+        run: |
+          curl -fL -o "$HOME/ndk.zip" https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip
+          unzip -q "$HOME/ndk.zip" -d "$HOME"
+          echo "$HOME/android-ndk-r16b" >> "$GITHUB_PATH"
+
+      - name: Build su
+        working-directory: Superuser/Superuser
+        run: ndk-build APP_ABI="${{ inputs.app_abi }}"
+
+      - name: Upload su binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: su-binaries
+          path: |
+            Superuser/Superuser/libs/*/su
+          if-no-files-found: error
