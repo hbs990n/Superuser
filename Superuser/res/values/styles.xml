@@ -1,5 +1,15 @@
 <resources>
 
+    <!-- Missing theme definitions (were in removed Widgets module) -->
+    <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <style name="AppDarkTheme" parent="@android:style/Theme.Holo">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <style name="AppActivityTheme" parent="@android:style/Theme.Holo.Light.NoActionBar" />
+    <style name="AppDarkActivityTheme" parent="@android:style/Theme.Holo.NoActionBar" />
+
     <style name="BottomButton">
         <item name="android:textColor">?attr/bottomButtonBarText</item>
     </style>
