@@ -3,12 +3,49 @@
     <!-- Missing theme definitions (were in removed Widgets module) -->
     <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
         <item name="android:windowNoTitle">true</item>
+        <item name="listContentHeader">?android:attr/listSeparatorTextViewStyle</item>
+        <item name="listHeaderTextColor">@color/holo_blue_dark</item>
+        <item name="listItemsLeftBackground">@null</item>
+        <item name="listItemsRightBackground">@null</item>
+        <item name="listPreferredItemPaddingLeft">6dp</item>
+        <item name="listPreferredItemPaddingRight">6dp</item>
+        <item name="iconSize">24dp</item>
     </style>
     <style name="AppDarkTheme" parent="@android:style/Theme.Holo">
         <item name="android:windowNoTitle">true</item>
+        <item name="listContentHeader">?android:attr/listSeparatorTextViewStyle</item>
+        <item name="listHeaderTextColor">@android:color/holo_blue_light</item>
+        <item name="listItemsLeftBackground">@null</item>
+        <item name="listItemsRightBackground">@null</item>
+        <item name="listPreferredItemPaddingLeft">6dp</item>
+        <item name="listPreferredItemPaddingRight">6dp</item>
+        <item name="iconSize">24dp</item>
     </style>
-    <style name="AppActivityTheme" parent="@android:style/Theme.Holo.Light.NoActionBar" />
-    <style name="AppDarkActivityTheme" parent="@android:style/Theme.Holo.NoActionBar" />
+    <style name="AppActivityTheme" parent="@android:style/Theme.Holo.Light.NoActionBar">
+        <item name="listContentHeader">?android:attr/listSeparatorTextViewStyle</item>
+        <item name="listHeaderTextColor">@color/holo_blue_dark</item>
+        <item name="listItemsLeftBackground">@null</item>
+        <item name="listItemsRightBackground">@null</item>
+        <item name="listPreferredItemPaddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="listPreferredItemPaddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="iconSize">24dp</item>
+    </style>
+    <style name="AppDarkActivityTheme" parent="@android:style/Theme.Holo.NoActionBar">
+        <item name="listContentHeader">?android:attr/listSeparatorTextViewStyle</item>
+        <item name="listHeaderTextColor">@android:color/holo_blue_light</item>
+        <item name="listItemsLeftBackground">@null</item>
+        <item name="listItemsRightBackground">@null</item>
+        <item name="listPreferredItemPaddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="listPreferredItemPaddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="iconSize">24dp</item>
+    </style>
+
+    <style name="ListItemTitle">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="ListItemSummary">
+        <item name="android:textSize">12sp</item>
+    </style>
 
     <style name="BottomButton">
         <item name="android:textColor">?attr/bottomButtonBarText</item>

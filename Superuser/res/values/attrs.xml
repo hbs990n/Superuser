@@ -14,4 +14,12 @@
     <attr name="themeIcon" format="reference|color" />
     <attr name="largeIconTheme" format="reference" />
     <attr name="iconSize" format="dimension" />
+    <!-- System attrs referenced in layouts -->
+    <attr name="listPreferredItemPaddingLeft" format="dimension" />
+    <attr name="listPreferredItemPaddingRight" format="dimension" />
+    <!-- List widget attrs, previously provided by the removed Widgets module -->
+    <attr name="listContentHeader" format="reference" />
+    <attr name="listHeaderTextColor" format="reference|color" />
+    <attr name="listItemsLeftBackground" format="reference|color" />
+    <attr name="listItemsRightBackground" format="reference|color" />
 </resources>
